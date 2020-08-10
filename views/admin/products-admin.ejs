@@ -1,12 +1,12 @@
 <%- include('../partials/header.ejs'); %>
 
 <div class="row mt-4">
-    <div class="col-4">
-        <button type="submit" class="btn btn-primary btn-block">Agregar nuevo producto<button>
+    <div class="col-3">
+        <a href="/administrador/agregar-producto" class="btn btn-primary btn-block">Agregar nuevo producto</a>
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-2">
     <div class="col-12">
         <table class="table">
             <thead>
@@ -29,7 +29,7 @@
                     <td>imagen</td>
                     <td>autor</td>
                     <td>tecnologia</td>
-                    <td><a href="#" class="btn btn-success">Editar</a></td>
+                    <td><a href="/administrador/editar-producto" class="btn btn-success">Editar</a></td>
                     <td>
                         <form action="#" method="POST">
                             <input type="hidden" name="id">
