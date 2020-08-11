@@ -27,16 +27,16 @@ route.post('/iniciar-sesion', async (req, res) => {
         session.usuarioid = usuarioconsultado.id;
 
         if (usuarioconsultado.tipo == 0) {
-          session.tipo = false;
+          session.tipo = true;
           res.redirect('administrador/productos');
         } else {
-          session.tipo = true;
+          session.tipo = false;
           res.redirect('/');
         }
       }
+    } else {
+      res.redirect('/iniciar-sesion');
     }
-
-    res.redirect('/iniciar-sesion');
   } catch (error) {
     console.log(error);
   }

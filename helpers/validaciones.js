@@ -1,3 +1,5 @@
+const session = require('express-session');
+
 exports.validacion = (req, res, next) => {
   if (req.session.tipo == true) {
     return next();
@@ -12,7 +14,7 @@ exports.starSession = session({
   saveUninitialized: true,
 });
 
-exports.sesionglobal =  (req, res, next) {
+exports.sesionglobal = (req, res, next) => {
   res.locals.session = req.session;
   next();
 };
