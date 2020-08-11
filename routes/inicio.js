@@ -21,4 +21,8 @@ route.get('/acerca-de', (req, res) => {
   res.render('about');
 });
 
+route.get('/comprados', (req, res) => {
+  res.render('comprados');
+});
+
 module.exports = route;

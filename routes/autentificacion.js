@@ -8,7 +8,15 @@ route.get('/iniciar-sesion', (req, res) => {
   res.render('login');
 });
 
-route.get('/cerrar-sesion', (req, res) => {});
+route.get('/cerrar-sesion', (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      return console.log(error);
+    } else {
+      res.redirect('/');
+    }
+  });
+});
 
 route.post('/iniciar-sesion', async (req, res) => {
   try {
