@@ -9,8 +9,6 @@ const Comentarios = sequelize.define('comentarios', {
     allowNull: false,
     primaryKey: true,
   },
-  idusuario: Sequelize.INTEGER,
-  idproducto: Sequelize.INTEGER,
   comentario: Sequelize.STRING,
 });
 

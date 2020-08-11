@@ -9,9 +9,7 @@ const Pago = sequelize.define('pago', {
     allowNull: false,
     primaryKey: true,
   },
-  id: Sequelize.STRING,
-  total: Sequelize.INTERGER,
-  usuario: Sequelize.STRING,
+  total: Sequelize.INTEGER,
 });
 
 module.exports = Pago;
