@@ -1,13 +1,16 @@
 const express = require('express');
-
+const producto = require('../models/producto');
 const route = express.Router();
 
 route.get('/', (req, res) => {
   res.render('home');
 });
 
-route.get('/productos', (req, res) => {
-  res.render('products');
+route.get('/productos', async (req, res) => {
+  const productos = await producto.findAll();
+  res.render('products', {
+    result: productos,
+  });
 });
 
 route.get('/carrito-compras', (req, res) => {
