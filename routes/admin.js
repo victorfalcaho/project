@@ -61,6 +61,67 @@ route.post('/agregar-producto', async (req, res) => {
   }
 });
 
+route.post('/editar-producto', async (req, res) => {
+  try {
+    const {
+      titulo,
+      descripcion,
+      precio,
+      estado,
+      autor,
+      tecnologia,
+      id,
+    } = req.body;
+    const { imagen, zip } = req.files;
+
+    const fecha = Date.now();
+    const imagenpath = fecha + imagen.name;
+    const zippath = fecha + zip.name;
+
+    imagen.mv(
+      path.join(__dirname, '../', 'public', 'imagenes', `${imagenpath}`)
+    );
+    zip.mv(path.join(__dirname, '../', 'public', 'archivos', `${zippath}`));
+
+    const productoencontrado = await producto.findByPk(id);
+
+    const borrarImagen = path.join(
+      __dirname,
+      '../',
+      'public',
+      'imagenes',
+      `${productoencontrado.imagen}`
+    );
+
+    const borrarZip = path.join(
+      __dirname,
+      '../',
+      'public',
+      'archivos',
+      `${productoencontrado.zip}`
+    );
+
+    fs.unlinkSync(borrarImagen);
+    fs.unlinkSync(borrarZip);
+
+    productoencontrado.titulo = titulo;
+    productoencontrado.descripcion = descripcion;
+    productoencontrado.precio = precio;
+    productoencontrado.estado = estado;
+    productoencontrado.imagen = imagenpath;
+    productoencontrado.autor = autor;
+    productoencontrado.tecnologia = tecnologia;
+    productoencontrado.zip = zippath;
+    const editado = await productoencontrado.save();
+
+    if (editado) {
+      res.redirect('/administrador/productos');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 route.post('/eliminar-producto', async (req, res) => {
   try {
     const { id } = req.body;
