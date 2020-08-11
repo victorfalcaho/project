@@ -20,12 +20,19 @@ app.use(fileUpload());
 
 const inicioRoutes = require('./routes/inicio');
 const administradorRoutes = require('./routes/admin');
+const autentificacionRoutes = require('./routes/autentificacion');
+const validaciones = require('./helpers/validaciones');
+
+app.use(validaciones.starSession);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(validaciones.sesionglobal);
+
 app.use(inicioRoutes);
-app.use('/administrador', administradorRoutes);
+app.use('/administrador', validaciones.validacion, administradorRoutes);
+app.use(autentificacionRoutes);
 
 comentarios.belongsTo(usuario);
 comentarios.belongsTo(producto);

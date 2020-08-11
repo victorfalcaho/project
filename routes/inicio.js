@@ -21,8 +21,4 @@ route.get('/acerca-de', (req, res) => {
   res.render('about');
 });
 
-route.get('/iniciar-sesion', (req, res) => {
-  res.render('login');
-});
-
 module.exports = route;
