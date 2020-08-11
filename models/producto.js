@@ -16,6 +16,7 @@ const Producto = sequelize.define('producto', {
   imagen: Sequelize.STRING,
   autor: Sequelize.STRING,
   tecnologia: Sequelize.STRING,
+  zip: Sequelize.STRING,
 });
 
 module.exports = Producto;

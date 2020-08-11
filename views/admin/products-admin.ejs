@@ -14,29 +14,36 @@
                     <th scope="col">Titulo</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Precio</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Autor</th>
                     <th scope="col">Tecnologia</th>
+                    <th scope="col">Zip</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
+                <% for (let producto of result) { %>
                 <tr>
-                    <td>titulo</td>
-                    <td>descripcion</td>
-                    <td>precio</td>
-                    <td>imagen</td>
-                    <td>autor</td>
-                    <td>tecnologia</td>
-                    <td><a href="/administrador/editar-producto" class="btn btn-success">Editar</a></td>
+                    <td><%= producto.titulo %></td>
+                    <td><%= producto.descripcion %></td>
+                    <td><%= producto.precio %></td>
+                    <td><%= producto.estado %></td>
+                    <td><%= producto.imagen %></td>
+                    <td><%= producto.autor %></td>
+                    <td><%= producto.tecnologia %></td>
+                    <td><%= producto.zip %></td>
+                    <td><a href="/administrador/editar-producto/<%= producto.id %>" class="btn btn-success">Editar</a>
+                    </td>
                     <td>
-                        <form action="#" method="POST">
-                            <input type="hidden" name="id">
+                        <form action="/administrador/eliminar-producto" method="POST">
+                            <input type="hidden" name="id" value="<%= producto.id %>">
                             <button class="btn btn-danger" type="submit">Eliminar</button>
                         </form>
                     </td>
                 </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

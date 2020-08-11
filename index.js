@@ -16,11 +16,11 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.use(fileUpload());
 
 const inicioRoutes = require('./routes/inicio');
 const administradorRoutes = require('./routes/admin');
 
-app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
