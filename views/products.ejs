@@ -13,9 +13,11 @@
         <div class="card mb-4">
             <img class="card-img-top" src="/imagenes/<%= producto.imagen %>">
             <div class="card-body">
-                <h2 class="card-title"><%= producto.titulo %></h2>
+                <a href="/detalle-producto">
+                    <h2 class="card-title"><%= producto.titulo %></h2>
+                </a>
                 <p class="card-text"><%= producto.descripcion %></p>
-                <a href="#" class="btn btn-primary btn-block">$ <%= producto.precio %></a>
+                <h4>$ <%= producto.precio %></h4>
                 <% if (typeof session.usuarioid !== "undefined") { %>
                 <form action="/agregar-carrito" method="POST" class="mt-2">
                     <input type="hidden" name="id" value="<%= producto.id %>">

@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="row mt-2">
+<div class="row mt-4">
     <div class="col-12">
         <table class="table">
             <thead>
@@ -14,11 +14,9 @@
                     <th scope="col">Titulo</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Imagen</th>
                     <th scope="col">Autor</th>
                     <th scope="col">Tecnologia</th>
-                    <th scope="col">Zip</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
                 </tr>
@@ -29,11 +27,9 @@
                     <td><%= producto.titulo %></td>
                     <td><%= producto.descripcion %></td>
                     <td><%= producto.precio %></td>
-                    <td><%= producto.estado %></td>
-                    <td><%= producto.imagen %></td>
                     <td><%= producto.autor %></td>
                     <td><%= producto.tecnologia %></td>
-                    <td><%= producto.zip %></td>
+                    <td><%= producto.estado %></td>
                     <td><a href="/administrador/editar-producto/<%= producto.id %>" class="btn btn-success">Editar</a>
                     </td>
                     <td>

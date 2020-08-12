@@ -7,12 +7,17 @@ const route = express.Router();
 
 route.get('/carrito-compras', async (req, res) => {
   const usuarioid = req.session.usuarioid;
-  const micarrito = await carrito.findAll({
-    where: { usuarioId: usuarioid },
-    include: [usuario, producto],
-  });
+  let micarrito = 0;
+
+  if (typeof usuarioid != 'undefined') {
+    micarrito = await carrito.findAll({
+      where: { usuarioId: usuarioid },
+      include: [usuario, producto],
+    });
+  }
   res.render('cart', {
     result: micarrito,
+    total: 0,
   });
 });
 

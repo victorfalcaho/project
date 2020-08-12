@@ -14,8 +14,8 @@
         <table class="table mt-4">
             <thead>
                 <tr>
-                    <th scope="col">Titulo</th>
                     <th scope="col">Precio</th>
+                    <th scope="col">Titulo</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Eliminar</th>
                 </tr>
@@ -23,8 +23,8 @@
             <tbody>
                 <% for (let carrito of result) { %>
                 <tr>
+                    <td>$<%= carrito.producto.precio %></td>
                     <td><%= carrito.producto.titulo %></td>
-                    <td><%= carrito.producto.precio %></td>
                     <td><img src="/imagenes/<%= carrito.producto.imagen %>" width="80px">
                     </td>
                     <td>
@@ -34,7 +34,21 @@
                         </form>
                     </td>
                 </tr>
+                <%= total += carrito.producto.precio %>
                 <% } %>
+                <tr>
+                    <td colspan="3">
+                        <strong>
+                            <h2>Total: $<%= total %></h3>
+                        </strong>
+                    </td>
+                    <td colspan="1">
+                        <form action="/comprar" method="POST">
+                            <input type="hidden" name="total" value="">
+                            <button class="btn btn-primary" type="submit">Comprar</button>
+                        </form>
+                    </td>
+                </tr>
             </tbody>
         </table>
 

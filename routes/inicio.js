@@ -2,8 +2,11 @@ const express = require('express');
 const producto = require('../models/producto');
 const route = express.Router();
 
-route.get('/', (req, res) => {
-  res.render('home');
+route.get('/', async (req, res) => {
+  const productos = await producto.findAll();
+  res.render('home', {
+    result: productos,
+  });
 });
 
 route.get('/productos', async (req, res) => {

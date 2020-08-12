@@ -7,24 +7,32 @@
 </div>
 
 <div class="row">
+    <% for (let producto of result) { %>
     <div class="col-3">
         <!-- Blog Post -->
         <div class="card mb-4">
-            <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+            <img class="card-img-top" src="/imagenes/<%= producto.imagen %>">
             <div class="card-body">
-                <h2 class="card-title">Titulo</h2>
-                <p class="card-text">Descripcion</p>
-                <a href="#" class="btn btn-primary btn-block">Precio</a>
+                <a href="/detalle-producto">
+                    <h2 class="card-title"><%= producto.titulo %></h2>
+                </a>
+                <p class="card-text"><%= producto.descripcion %></p>
+                <h4>$ <%= producto.precio %></h4>
                 <% if (typeof session.usuarioid !== "undefined") { %>
+                <form action="/agregar-carrito" method="POST" class="mt-2">
+                    <input type="hidden" name="id" value="<%= producto.id %>">
+                    <button class="btn btn-success btn-block" type="submit">Agregar al carrito</button>
+                </form>
                 <% } %>
             </div>
             <div class="card-footer text-muted">
-                <a href="#">Tecnologia</a>
+                <a href="#"><%= producto.tecnologia %></a>
                 by
-                <a href="#">Autor</a>
+                <a href="#"><%= producto.autor %></a>
             </div>
         </div>
     </div>
+    <% } %>
 </div>
 
 
