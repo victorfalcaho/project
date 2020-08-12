@@ -13,7 +13,7 @@
         <div class="card mb-4">
             <img class="card-img-top" src="/imagenes/<%= producto.imagen %>">
             <div class="card-body">
-                <a href="/detalle-producto">
+                <a href="/detalle-producto/<%= producto.id %>">
                     <h2 class="card-title"><%= producto.titulo %></h2>
                 </a>
                 <p class="card-text"><%= producto.descripcion %></p>
@@ -26,9 +26,7 @@
                 <% } %>
             </div>
             <div class="card-footer text-muted">
-                <a href="#"><%= producto.tecnologia %></a>
-                by
-                <a href="#"><%= producto.autor %></a>
+                <p class="text-success"><%= producto.tecnologia %> by <%= producto.autor %></p>
             </div>
         </div>
     </div>

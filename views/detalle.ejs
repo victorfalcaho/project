@@ -1,31 +1,69 @@
 <%- include('./partials/header.ejs'); %>
 
-<div class="row">
-    <div class="col-12">
-        <h1 class="my-4">Detalle producto</h1>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-3">
-        <!-- Blog Post -->
+<div class="row mt-5">
+    <div class="col-2"></div>
+    <div class="col-4">
         <div class="card mb-4">
             <img class="card-img-top" src="/imagenes/<%= result.imagen %>">
             <div class="card-body">
                 <h2 class="card-title"><%= result.titulo %></h2>
                 <p class="card-text"><%= result.descripcion %></p>
-                <a href="#" class="btn btn-primary btn-block">$ <%= result.precio %></a>
+                <h4>$ <%= result.precio %></h4>
                 <% if (typeof session.usuarioid !== "undefined") { %>
+                <form action="/agregar-carrito" method="POST" class="mt-2">
+                    <input type="hidden" name="id" value="<%= result.id %>">
+                    <button class="btn btn-success btn-block" type="submit">Agregar al carrito</button>
+                </form>
                 <% } %>
             </div>
             <div class="card-footer text-muted">
-                <a href="#"><%= result.tecnologia %></a>
-                by
-                <a href="#"><%= result.autor %></a>
+                <p class="text-success"><%= result.tecnologia %> by <%= result.autor %></p>
             </div>
         </div>
     </div>
+    <div class="col-4">
+        <% for (let comentariousuario of comentarios) { %>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><%= comentariousuario.usuario.usuario %></h5>
+                <p class="card-text"><%= comentariousuario.comentario %></p>
+                <% if (session.usuarioid == comentariousuario.usuarioId ) { %>
+                <form action="/eliminar-comentario" method="POST">
+                    <input type="hidden" name="idproducto" value="<%= result.id %>">
+                    <input type="hidden" name="id" value="<%=comentariousuario.id%>">
+                    <button class="btn btn-danger btn-sm" type="submit">Eliminar comentario</button>
+                </form>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+    <div class="col-2"></div>
 </div>
+
+
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-4">
+        <% if (typeof session.usuarioid !== "undefined") { %>
+        <form action="/agregar-comentario" method="POST">
+            <div class="form-group">
+                <input type="hidden" name="id" value="<%= result.id %>">
+                <textarea name="comentariousuario" id="comentariousuario" rows="3" class="form-control"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Agregar comentario</button>
+        </form>
+        <% }else{ %>
+        <h5>Iniciar session para poder realizar un comentario!</h5>
+        <% } %>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-2"></div>
+</div>
+
+
+
 
 
 <%- include('./partials/footer.ejs'); %>
