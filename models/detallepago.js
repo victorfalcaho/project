@@ -15,6 +15,7 @@ const DetallePago = sequelize.define('detallepago', {
   tipodepago: Sequelize.STRING,
   autor: Sequelize.STRING,
   tecnologia: Sequelize.STRING,
+  zip: Sequelize.STRING,
 });
 
 module.exports = DetallePago;

@@ -1,29 +1,40 @@
 <%- include('./partials/header.ejs'); %>
 
-<div class="row">
+<div class="row mt-4">
     <div class="col-12">
-        <h1 class="my-4">Carrito de compras</h1>
+        <h2>Carrito de compras</h2>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-3">
-        <!-- Blog Post -->
-        <div class="card mb-4">
-            <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-            <div class="card-body">
-                <h2 class="card-title">Titulo</h2>
-                <p class="card-text">Descripcion</p>
-                <a href="#" class="btn btn-primary">Precio &rarr;</a>
-            </div>
-            <div class="card-footer text-muted">
-                <a href="#">Tecnologia</a>
-                by
-                <a href="#">Autor</a>
-            </div>
-        </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>titulo</td>
+                    <td>precio</td>
+                    <td><img src="/imagenes/1597171699812Screenshot from 2020-08-10 02-57-29.png" width="80px">
+                    </td>
+                    <td>
+                        <form action="#" method="POST">
+                            <input type="hidden" name="id">
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
 
 
 <%- include('./partials/footer.ejs'); %>

@@ -13,16 +13,12 @@ route.get('/productos', async (req, res) => {
   });
 });
 
-route.get('/carrito-compras', (req, res) => {
-  res.render('cart');
+route.get('/detalle-producto', async (req, res) => {
+  res.render('detalle', {});
 });
 
 route.get('/acerca-de', (req, res) => {
   res.render('about');
-});
-
-route.get('/comprados', (req, res) => {
-  res.render('comprados');
 });
 
 module.exports = route;
