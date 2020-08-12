@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const producto = require('../models/producto');
+const pago = require('../models/pago');
+const detallepago = require('../models/detallepago');
 
 const route = express.Router();
 
@@ -24,8 +26,24 @@ route.get('/editar-producto/:id', async (req, res) => {
   });
 });
 
-route.get('/ventas', (req, res) => {
-  res.render('admin/sales');
+route.get('/ventas', async (req, res) => {
+  try {
+    let total = 0;
+    const consultarpagos = await pago.findAll();
+
+    consultarpagos.forEach((pagoconsultado) => {
+      total += pagoconsultado.total;
+    });
+
+    const consultardetallepagos = await detallepago.findAll();
+
+    res.render('admin/sales', {
+      result: consultardetallepagos,
+      total: total,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 route.post('/agregar-producto', async (req, res) => {

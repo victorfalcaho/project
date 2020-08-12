@@ -7,8 +7,37 @@ const carrito = require('../models/carrito');
 
 const route = express.Router();
 
-route.get('/comprados', (req, res) => {
-  res.render('comprados');
+route.get('/comprados', async (req, res) => {
+  try {
+    const usuarioid = req.session.usuarioid;
+    let total = 0;
+    const detalleinfo = [];
+    let consultarpago = 0;
+
+    if (usuarioid) {
+      consultarpago = await pago.findAll({
+        where: { usuarioId: usuarioid },
+      });
+
+      for (let index = 0; index < consultarpago.length; index++) {
+        const consultardetallepago = await detallepago.findAll({
+          where: { pagoId: consultarpago[index].id },
+        });
+        detalleinfo.push(consultardetallepago);
+      }
+
+      consultarpago.forEach(async (pagousuario) => {
+        total = total + pagousuario.total;
+      });
+    }
+
+    res.render('comprados', {
+      result: detalleinfo,
+      total: total,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 route.post('/comprar', async (req, res) => {

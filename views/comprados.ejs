@@ -8,30 +8,37 @@
         <table class="table mt-4">
             <thead>
                 <tr>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Producto</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Imagen</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Tipo de pago</th>
                     <th scope="col">Autor</th>
                     <th scope="col">Tecnologia</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
+                    <th scope="col">Manual</th>
                 </tr>
             </thead>
             <tbody>
+                <% for (let detalle of result) { %>
+                <% for (let producto of detalle) { %>
                 <tr>
-                    <td>titulo</td>
-                    <td>descripcion</td>
-                    <td>precio</td>
-                    <td>imagen</td>
-                    <td>autor</td>
-                    <td>tecnologia</td>
-                    <td><a href="#" class="btn btn-success">Editar</a></td>
+                    <td><%= producto.producto %></td>
+                    <td><%= producto.precio %></td>
+                    <td><%= producto.descripcion %></td>
+                    <td><%= producto.tipodepago %></td>
+                    <td><%= producto.autor %></td>
+                    <td><%= producto.tecnologia %></td>
                     <td>
-                        <form action="#" method="POST">
-                            <input type="hidden" name="id">
-                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                        </form>
+                        <a class="btn btn-primary" href="/archivos/<%= producto.zip %>">Archivo
+                        </a>
+                    </td>
+                </tr>
+                <% } %>
+                <% } %>
+                <tr>
+                    <td colspan="3">
+                        <strong>
+                            <h2>Total de dinero gastado: $<%= total %></h3>
+                        </strong>
                     </td>
                 </tr>
             </tbody>
