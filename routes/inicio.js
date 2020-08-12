@@ -2,11 +2,26 @@ const express = require('express');
 const producto = require('../models/producto');
 const comentarios = require('../models/comentarios');
 const usuario = require('../models/usuario');
+const detallepago = require('../models/detallepago');
+const sequelize = require('../database/database');
 
 const route = express.Router();
 
 route.get('/', async (req, res) => {
-  const productos = await producto.findAll({ where: { estado: 1 } });
+  const productos = await detallepago.findAll({
+    attributes: [
+      'producto',
+      [sequelize.fn('count', sequelize.col('producto')), 'count'],
+      'precio',
+      'descripcion',
+      'autor',
+      'tecnologia',
+    ],
+    group: ['producto', 'precio', 'descripcion', 'autor', 'tecnologia'],
+    raw: true,
+    order: sequelize.literal('count DESC'),
+  });
+
   res.render('home', {
     result: productos,
   });

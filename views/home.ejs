@@ -7,30 +7,28 @@
 </div>
 
 <div class="row">
-    <% for (let producto of result) { %>
-    <div class="col-3">
-        <!-- Blog Post -->
-        <div class="card mb-4">
-            <img class="card-img-top" src="/imagenes/<%= producto.imagen %>">
-            <div class="card-body">
-                <a href="/detalle-producto/<%= producto.id %>">
-                    <h2 class="card-title"><%= producto.titulo %></h2>
-                </a>
-                <p class="card-text"><%= producto.descripcion %></p>
-                <h4>$ <%= producto.precio %></h4>
-                <% if (typeof session.usuarioid !== "undefined") { %>
-                <form action="/agregar-carrito" method="POST" class="mt-2">
-                    <input type="hidden" name="id" value="<%= producto.id %>">
-                    <button class="btn btn-success btn-block" type="submit">Agregar al carrito</button>
-                </form>
-                <% } %>
-            </div>
-            <div class="card-footer text-muted">
-                <p class="text-success"><%= producto.tecnologia %> by <%= producto.autor %></p>
-            </div>
-        </div>
-    </div>
-    <% } %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Tecnologia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let producto of result) { %>
+            <tr>
+                <th scope="row"><%= producto.producto %></th>
+                <td>$<%= producto.precio %></td>
+                <td><%= producto.descripcion %></td>
+                <td><%= producto.autor %></td>
+                <td><%= producto.tecnologia %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
 </div>
 
 
