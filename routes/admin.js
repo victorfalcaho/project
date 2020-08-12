@@ -64,7 +64,12 @@ route.post('/buscar-producto', async (req, res) => {
 
 route.post('/filtrar-fecha', async (req, res) => {
   try {
-    const { fecha } = req.body;
+    let { fecha } = req.body;
+
+    if (fecha == '' || typeof fecha == 'undefined') {
+      return res.redirect('/administrador/ventas');
+    }
+
     let total = 0;
     const consultarpagos = await pago.findAll({ where: { createdAt: fecha } });
 
