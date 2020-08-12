@@ -8,7 +8,10 @@
 
 <div class="row">
     <div class="col-12">
-        <table class="table">
+
+        <% if (typeof session.usuarioid !== "undefined") { %>
+
+        <table class="table mt-4">
             <thead>
                 <tr>
                     <th scope="col">Titulo</th>
@@ -18,20 +21,26 @@
                 </tr>
             </thead>
             <tbody>
+                <% for (let carrito of result) { %>
                 <tr>
-                    <td>titulo</td>
-                    <td>precio</td>
-                    <td><img src="/imagenes/1597171699812Screenshot from 2020-08-10 02-57-29.png" width="80px">
+                    <td><%= carrito.producto.titulo %></td>
+                    <td><%= carrito.producto.precio %></td>
+                    <td><img src="/imagenes/<%= carrito.producto.imagen %>" width="80px">
                     </td>
                     <td>
-                        <form action="#" method="POST">
-                            <input type="hidden" name="id">
+                        <form action="/eliminar-carrito" method="POST">
+                            <input type="hidden" name="id" value="<%= carrito.producto.id %>">
                             <button class="btn btn-danger" type="submit">Eliminar</button>
                         </form>
                     </td>
                 </tr>
+                <% } %>
             </tbody>
         </table>
+
+        <% }else{ %>
+        <h2>Debes iniciar sesion, para poder ver tu carrito!</h2>
+        <% } %>
     </div>
 </div>
 

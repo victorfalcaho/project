@@ -8,7 +8,10 @@
 
 <div class="row">
     <div class="col-12">
-        <table class="table">
+
+        <% if (typeof session.usuarioid !== "undefined") { %>
+
+        <table class="table mt-4">
             <thead>
                 <tr>
                     <th scope="col">Titulo</th>
@@ -39,6 +42,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <% }else{ %>
+        <h2>Debes iniciar session para ver tus productos comprados</h2>
+        <% } %>
     </div>
 </div>
 

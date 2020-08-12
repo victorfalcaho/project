@@ -20,6 +20,9 @@ app.use(fileUpload());
 const inicioRoutes = require('./routes/inicio');
 const administradorRoutes = require('./routes/admin');
 const autentificacionRoutes = require('./routes/autentificacion');
+const carritoRoutes = require('./routes/carrito');
+const comprasRoutes = require('./routes/compras');
+
 const validaciones = require('./helpers/validaciones');
 
 app.use(validaciones.starSession);
@@ -32,6 +35,8 @@ app.use(validaciones.sesionglobal);
 app.use(inicioRoutes);
 app.use('/administrador', validaciones.validacion, administradorRoutes);
 app.use(autentificacionRoutes);
+app.use(carritoRoutes);
+app.use(comprasRoutes);
 
 comentarios.belongsTo(usuario);
 comentarios.belongsTo(producto);

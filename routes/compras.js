@@ -5,3 +5,5 @@ const route = express.Router();
 route.get('/comprados', (req, res) => {
   res.render('comprados');
 });
+
+module.exports = route;
