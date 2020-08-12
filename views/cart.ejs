@@ -2,14 +2,12 @@
 
 <div class="row mt-4">
     <div class="col-12">
-
         <% if (typeof session.usuarioid !== "undefined") { %>
-
         <table class="table mt-4">
             <thead>
                 <tr>
                     <th scope="col">Precio</th>
-                    <th scope="col">Titulo</th>
+                    <th scope="col">Título</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Eliminar</th>
                 </tr>
@@ -28,7 +26,7 @@
                         </form>
                     </td>
                 </tr>
-                <%= total += carrito.producto.precio %>
+                <% total += carrito.producto.precio %>
                 <% } %>
                 <tr>
                     <td colspan="3">
