@@ -10,10 +10,14 @@ const Op = Sequelize.Op;
 const route = express.Router();
 
 route.get('/productos', async (req, res) => {
-  const productos = await producto.findAll();
-  res.render('admin/products-admin', {
-    result: productos,
-  });
+  try {
+    const productos = await producto.findAll();
+    res.render('admin/products-admin', {
+      result: productos,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 route.get('/agregar-producto', (req, res) => {
@@ -21,11 +25,15 @@ route.get('/agregar-producto', (req, res) => {
 });
 
 route.get('/editar-producto/:id', async (req, res) => {
-  const { id } = req.params;
-  const productos = await producto.findByPk(id);
-  res.render('admin/products-admin-edit', {
-    result: productos,
-  });
+  try {
+    const { id } = req.params;
+    const productos = await producto.findByPk(id);
+    res.render('admin/products-admin-edit', {
+      result: productos,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 route.get('/ventas', async (req, res) => {
@@ -49,17 +57,21 @@ route.get('/ventas', async (req, res) => {
 });
 
 route.post('/buscar-producto', async (req, res) => {
-  const { titulo } = req.body;
-  const productobuscado = await producto.findAll({
-    where: {
-      titulo: {
-        [Op.like]: `%${titulo}%`,
+  try {
+    const { titulo } = req.body;
+    const productobuscado = await producto.findAll({
+      where: {
+        titulo: {
+          [Op.like]: `%${titulo}%`,
+        },
       },
-    },
-  });
-  res.render('admin/products-admin', {
-    result: productobuscado,
-  });
+    });
+    res.render('admin/products-admin', {
+      result: productobuscado,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 route.post('/filtrar-fecha', async (req, res) => {
