@@ -4,6 +4,8 @@ const path = require('path');
 const producto = require('../models/producto');
 const pago = require('../models/pago');
 const detallepago = require('../models/detallepago');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const route = express.Router();
 
@@ -36,6 +38,43 @@ route.get('/ventas', async (req, res) => {
     });
 
     const consultardetallepagos = await detallepago.findAll();
+
+    res.render('admin/sales', {
+      result: consultardetallepagos,
+      total: total,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+route.post('/buscar-producto', async (req, res) => {
+  const { titulo } = req.body;
+  const productobuscado = await producto.findAll({
+    where: {
+      titulo: {
+        [Op.like]: `%${titulo}%`,
+      },
+    },
+  });
+  res.render('admin/products-admin', {
+    result: productobuscado,
+  });
+});
+
+route.post('/filtrar-fecha', async (req, res) => {
+  try {
+    const { fecha } = req.body;
+    let total = 0;
+    const consultarpagos = await pago.findAll({ where: { createdAt: fecha } });
+
+    consultarpagos.forEach((pagoconsultado) => {
+      total += pagoconsultado.total;
+    });
+
+    const consultardetallepagos = await detallepago.findAll({
+      where: { createdAt: fecha },
+    });
 
     res.render('admin/sales', {
       result: consultardetallepagos,

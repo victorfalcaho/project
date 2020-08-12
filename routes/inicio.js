@@ -6,14 +6,14 @@ const usuario = require('../models/usuario');
 const route = express.Router();
 
 route.get('/', async (req, res) => {
-  const productos = await producto.findAll();
+  const productos = await producto.findAll({ where: { estado: 1 } });
   res.render('home', {
     result: productos,
   });
 });
 
 route.get('/productos', async (req, res) => {
-  const productos = await producto.findAll();
+  const productos = await producto.findAll({ where: { estado: 1 } });
   res.render('products', {
     result: productos,
   });

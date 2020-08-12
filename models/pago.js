@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = require('../database/database');
 
@@ -10,6 +10,12 @@ const Pago = sequelize.define('pago', {
     primaryKey: true,
   },
   total: Sequelize.INTEGER,
+  updatedAt: {
+    type: DataTypes.DATEONLY,
+  },
+  createdAt: {
+    type: DataTypes.DATEONLY,
+  },
 });
 
 module.exports = Pago;
